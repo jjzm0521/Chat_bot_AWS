@@ -32,7 +32,10 @@ export class LambdaStack extends cdk.Stack {
             actions: [
                 'comprehend:DetectSentiment',
                 'comprehend:DetectDominantLanguage',
+                'comprehend:DetectEntities',
+                'comprehend:DetectKeyPhrases',
                 'translate:TranslateText',
+                'bedrock:InvokeModel',
                 'lex:RecognizeText',
                 'lex:PutSession',
                 'lex:GetSession',
@@ -42,6 +45,7 @@ export class LambdaStack extends cdk.Stack {
         });
 
         // Lambda Orquestador - Recibe mensajes de WebSocket
+        // Nota: LEX_BOT_ID y LEX_BOT_ALIAS_ID se configurarán después del despliegue de LexStack
         this.orchestratorFunction = new lambda.Function(this, 'OrchestratorFunction', {
             functionName: 'ChatbotOrchestrator',
             runtime: lambda.Runtime.PYTHON_3_11,
@@ -54,11 +58,15 @@ export class LambdaStack extends cdk.Stack {
                 CONVERSATIONS_TABLE: props.conversationsTable.tableName,
                 KNOWLEDGE_BASE_TABLE: props.knowledgeBaseTable.tableName,
                 ANALYTICS_TABLE: props.analyticsTable.tableName,
-                LEX_BOT_ID: cdk.Fn.importValue('ChatbotLexBotId'),
-                LEX_BOT_ALIAS_ID: cdk.Fn.importValue('ChatbotLexBotAliasId'),
+                LEX_BOT_ID: 'X3ADVBRCTQ',
+                LEX_BOT_ALIAS_ID: '9VQMVYGAGE',
                 LOG_LEVEL: 'INFO',
             },
-            logRetention: logs.RetentionDays.ONE_WEEK,
+            logGroup: new logs.LogGroup(this, 'OrchestratorLogs', {
+                logGroupName: '/aws/lambda/ChatbotOrchestrator',
+                retention: logs.RetentionDays.ONE_WEEK,
+                removalPolicy: cdk.RemovalPolicy.DESTROY,
+            }),
         });
 
         // Lambda Fulfillment - Procesa intents de Lex
@@ -76,7 +84,11 @@ export class LambdaStack extends cdk.Stack {
                 ANALYTICS_TABLE: props.analyticsTable.tableName,
                 LOG_LEVEL: 'INFO',
             },
-            logRetention: logs.RetentionDays.ONE_WEEK,
+            logGroup: new logs.LogGroup(this, 'FulfillmentLogs', {
+                logGroupName: '/aws/lambda/ChatbotFulfillment',
+                retention: logs.RetentionDays.ONE_WEEK,
+                removalPolicy: cdk.RemovalPolicy.DESTROY,
+            }),
         });
 
         // Permisos para las Lambdas
@@ -101,5 +113,13 @@ export class LambdaStack extends cdk.Stack {
             value: this.fulfillmentFunction.functionArn,
             exportName: 'ChatbotFulfillmentArn',
         });
+    }
+
+    /**
+     * Configura las variables de entorno de Lex después de que el bot sea creado
+     */
+    public configureLexEnvironment(botId: string, botAliasId: string) {
+        this.orchestratorFunction.addEnvironment('LEX_BOT_ID', botId);
+        this.orchestratorFunction.addEnvironment('LEX_BOT_ALIAS_ID', botAliasId);
     }
 }

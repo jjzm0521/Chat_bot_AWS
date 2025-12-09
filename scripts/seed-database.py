@@ -8,7 +8,7 @@ import boto3
 from pathlib import Path
 import sys
 
-# Configuración
+# Configuracion
 REGION = 'us-east-1'
 KNOWLEDGE_BASE_TABLE = 'ChatbotKnowledgeBase'
 
@@ -48,11 +48,11 @@ def seed_knowledge_base(dynamodb, faqs):
         
         try:
             table.put_item(Item=item)
-            print(f"  ✓ {faq['category']}/{faq['topic_id']}")
+            print(f"  OK: {faq['category']}/{faq['topic_id']}")
         except Exception as e:
-            print(f"  ✗ Error insertando {faq['topic_id']}: {e}")
+            print(f"  ERROR insertando {faq['topic_id']}: {e}")
     
-    print(f"\n✓ {len(faqs)} FAQs insertadas correctamente")
+    print(f"\n{len(faqs)} FAQs insertadas correctamente")
 
 
 def main():
@@ -60,15 +60,15 @@ def main():
     print("  Chatbot AWS - Seed Database")
     print("=" * 50)
     
-    # Verificar conexión a AWS
+    # Verificar conexion a AWS
     try:
         dynamodb = boto3.resource('dynamodb', region_name=REGION)
         # Test connection
         dynamodb.meta.client.describe_table(TableName=KNOWLEDGE_BASE_TABLE)
-        print(f"\n✓ Conectado a DynamoDB en {REGION}")
+        print(f"\nConectado a DynamoDB en {REGION}")
     except Exception as e:
-        print(f"\n✗ Error conectando a DynamoDB: {e}")
-        print("\nAsegúrate de:")
+        print(f"\nError conectando a DynamoDB: {e}")
+        print("\nAsegurate de:")
         print("  1. Tener AWS CLI configurado (aws configure)")
         print("  2. Haber desplegado la infraestructura (./scripts/deploy.ps1)")
         sys.exit(1)
@@ -78,7 +78,7 @@ def main():
     seed_knowledge_base(dynamodb, faqs)
     
     print("\n" + "=" * 50)
-    print("  ✓ Base de datos poblada exitosamente")
+    print("  Base de datos poblada exitosamente")
     print("=" * 50)
 
 

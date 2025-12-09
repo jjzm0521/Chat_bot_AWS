@@ -12,10 +12,4 @@ export default defineConfig({
         outDir: 'dist',
         sourcemap: true,
     },
-    define: {
-        // Placeholder for WebSocket URL - will be replaced during deployment
-        'import.meta.env.VITE_WEBSOCKET_URL': JSON.stringify(
-            process.env.VITE_WEBSOCKET_URL || 'wss://your-api-id.execute-api.us-east-1.amazonaws.com/production'
-        ),
-    },
 })

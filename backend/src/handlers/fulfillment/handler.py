@@ -19,6 +19,7 @@ sys.path.insert(0, '/opt/python')
 from shared.config import Config
 from shared.dynamo_client import DynamoClient
 from shared.comprehend_client import ComprehendClient
+from shared.bedrock_client import BedrockClient
 from shared.models import AnalyticsEvent
 
 # Configure logging
@@ -28,6 +29,7 @@ logger.setLevel(getattr(logging, Config.LOG_LEVEL))
 # Initialize clients
 dynamo_client = DynamoClient()
 comprehend_client = ComprehendClient()
+bedrock_client = BedrockClient()
 
 
 def lambda_handler(event: dict, context) -> dict:
@@ -161,37 +163,32 @@ def handle_feedback(event: dict, slots: dict, language: str, session_id: str) ->
 
 def handle_fallback(event: dict, input_text: str, language: str) -> dict:
     """
-    Handle fallback intent with intelligent response.
+    Handle fallback intent with intelligent response using Bedrock.
     
-    Tries to understand the user's intent and provide helpful suggestions.
+    Uses Generative AI to provide helpful responses when no specific intent is matched.
     """
     logger.info(f"Fallback triggered for: {input_text}")
-    
-    # Extract key phrases to understand user intent
-    key_phrases = comprehend_client.detect_key_phrases(input_text, language)
-    
-    # Try to find related FAQs
-    suggestions = []
-    for phrase in key_phrases[:3]:  # Top 3 phrases
-        faqs = dynamo_client.search_faqs_by_keyword(phrase['text'])
-        for faq in faqs[:2]:
-            suggestions.append(faq.get_answer(language)[:50] + '...')
-    
-    if suggestions:
-        suggestions_text = '\n'.join([f"• {s}" for s in set(suggestions)])
-        response = get_message(language, 'fallback_suggestions').format(
-            suggestions=suggestions_text
-        )
-    else:
-        response = get_message(language, 'fallback_default')
     
     # Log analytics
     save_analytics_event('FALLBACK', {
         'input': input_text,
-        'keyPhrases': [p['text'] for p in key_phrases],
     })
     
-    return close_intent(event, 'Fulfilled', response)
+    # Use Bedrock to generate response
+    try:
+        # We can add more context here if available
+        context = f"The user is speaking in {language}."
+        
+        # Add some basic info about the business/bot if we want the AI to be aware
+        # context += " You are a helpful assistant for an e-commerce store."
+        
+        ai_response = bedrock_client.generate_response(input_text, context)
+        return close_intent(event, 'Fulfilled', ai_response)
+        
+    except Exception as e:
+        logger.error(f"Error using Bedrock in fallback: {e}")
+        # Default fallback if AI fails
+        return close_intent(event, 'Fulfilled', get_message(language, 'fallback_default'))
 
 
 # Response builders

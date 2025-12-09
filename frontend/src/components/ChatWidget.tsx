@@ -151,6 +151,7 @@ function ChatWidget({ isOpen, onClose }: ChatWidgetProps) {
                     <button
                         key={index}
                         className="quick-action-btn"
+                        onMouseDown={(e) => e.preventDefault()}
                         onClick={() => {
                             setInputValue(action);
                             inputRef.current?.focus();
