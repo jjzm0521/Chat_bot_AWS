@@ -1,0 +1,136 @@
+{
+    "faqs": [
+        {
+            "category": "general",
+            "topic_id": "precio",
+            "question_es": "¿Cuáles son los precios de sus productos?",
+            "question_en": "What are your product prices?",
+            "question_pt": "Quais são os preços dos seus produtos?",
+            "answer_es": "Nuestros precios varían según el producto. Puedes consultar nuestro catálogo en línea para ver los precios actualizados. También ofrecemos descuentos especiales para compras al por mayor.",
+            "answer_en": "Our prices vary by product. You can check our online catalog for updated prices. We also offer special discounts for bulk purchases.",
+            "answer_pt": "Nossos preços variam de acordo com o produto. Você pode consultar nosso catálogo online para ver os preços atualizados. Também oferecemos descontos especiais para compras em atacado.",
+            "keywords": [
+                "precio",
+                "precios",
+                "costo",
+                "valor",
+                "price",
+                "cost",
+                "preço",
+                "custo"
+            ]
+        },
+        {
+            "category": "envios",
+            "topic_id": "envio",
+            "question_es": "¿Cómo funcionan los envíos?",
+            "question_en": "How does shipping work?",
+            "question_pt": "Como funciona o envio?",
+            "answer_es": "Realizamos envíos a todo el país. El tiempo de entrega es de 3-5 días hábiles para zonas urbanas y 5-7 días para zonas rurales. El costo de envío se calcula según el peso y destino.",
+            "answer_en": "We ship nationwide. Delivery time is 3-5 business days for urban areas and 5-7 days for rural areas. Shipping cost is calculated based on weight and destination.",
+            "answer_pt": "Enviamos para todo o país. O prazo de entrega é de 3-5 dias úteis para áreas urbanas e 5-7 dias para áreas rurais. O custo do frete é calculado com base no peso e destino.",
+            "keywords": [
+                "envío",
+                "envio",
+                "entrega",
+                "shipping",
+                "delivery",
+                "despacho",
+                "frete"
+            ]
+        },
+        {
+            "category": "devoluciones",
+            "topic_id": "devolucion",
+            "question_es": "¿Cuál es la política de devoluciones?",
+            "question_en": "What is the return policy?",
+            "question_pt": "Qual é a política de devolução?",
+            "answer_es": "Aceptamos devoluciones dentro de los 30 días posteriores a la compra, siempre que el producto esté en su empaque original y sin uso. El reembolso se procesa en 5-7 días hábiles.",
+            "answer_en": "We accept returns within 30 days of purchase, as long as the product is in its original packaging and unused. Refunds are processed in 5-7 business days.",
+            "answer_pt": "Aceitamos devoluções dentro de 30 dias após a compra, desde que o produto esteja em sua embalagem original e sem uso. O reembolso é processado em 5-7 dias úteis.",
+            "keywords": [
+                "devolución",
+                "devolucion",
+                "reembolso",
+                "return",
+                "refund",
+                "devolução",
+                "reembolso"
+            ]
+        },
+        {
+            "category": "garantia",
+            "topic_id": "garantia",
+            "question_es": "¿Qué garantía tienen los productos?",
+            "question_en": "What warranty do products have?",
+            "question_pt": "Que garantia os produtos têm?",
+            "answer_es": "Todos nuestros productos tienen una garantía de 1 año que cubre defectos de fabricación. Para hacer uso de la garantía, debes presentar tu factura de compra.",
+            "answer_en": "All our products have a 1-year warranty covering manufacturing defects. To use the warranty, you must present your purchase invoice.",
+            "answer_pt": "Todos os nossos produtos têm garantia de 1 ano que cobre defeitos de fabricação. Para usar a garantia, você deve apresentar sua nota fiscal de compra.",
+            "keywords": [
+                "garantía",
+                "garantia",
+                "warranty",
+                "cobertura",
+                "coverage"
+            ]
+        },
+        {
+            "category": "horarios",
+            "topic_id": "horario",
+            "question_es": "¿Cuál es el horario de atención?",
+            "question_en": "What are the business hours?",
+            "question_pt": "Qual é o horário de atendimento?",
+            "answer_es": "Nuestro horario de atención es de lunes a viernes de 8:00 AM a 6:00 PM, y sábados de 9:00 AM a 2:00 PM. Los domingos y festivos permanecemos cerrados.",
+            "answer_en": "Our business hours are Monday to Friday from 8:00 AM to 6:00 PM, and Saturdays from 9:00 AM to 2:00 PM. We are closed on Sundays and holidays.",
+            "answer_pt": "Nosso horário de atendimento é de segunda a sexta das 8:00 às 18:00, e sábados das 9:00 às 14:00. Domingos e feriados permanecemos fechados.",
+            "keywords": [
+                "horario",
+                "horarios",
+                "atención",
+                "hours",
+                "schedule",
+                "horário",
+                "atendimento"
+            ]
+        },
+        {
+            "category": "contacto",
+            "topic_id": "contacto",
+            "question_es": "¿Cómo puedo contactarlos?",
+            "question_en": "How can I contact you?",
+            "question_pt": "Como posso entrar em contato?",
+            "answer_es": "Puedes contactarnos por teléfono al +1 (555) 123-4567, por email a soporte@empresa.com, o a través de nuestras redes sociales @empresa en Facebook, Twitter e Instagram.",
+            "answer_en": "You can contact us by phone at +1 (555) 123-4567, by email at support@company.com, or through our social media @company on Facebook, Twitter, and Instagram.",
+            "answer_pt": "Você pode nos contatar pelo telefone +1 (555) 123-4567, por email em suporte@empresa.com, ou através de nossas redes sociais @empresa no Facebook, Twitter e Instagram.",
+            "keywords": [
+                "contacto",
+                "teléfono",
+                "email",
+                "contact",
+                "phone",
+                "contato",
+                "telefone"
+            ]
+        },
+        {
+            "category": "pagos",
+            "topic_id": "pago",
+            "question_es": "¿Qué métodos de pago aceptan?",
+            "question_en": "What payment methods do you accept?",
+            "question_pt": "Quais métodos de pagamento vocês aceitam?",
+            "answer_es": "Aceptamos tarjetas de crédito y débito (Visa, MasterCard, American Express), transferencias bancarias, PayPal, y pago contra entrega en zonas seleccionadas.",
+            "answer_en": "We accept credit and debit cards (Visa, MasterCard, American Express), bank transfers, PayPal, and cash on delivery in selected areas.",
+            "answer_pt": "Aceitamos cartões de crédito e débito (Visa, MasterCard, American Express), transferências bancárias, PayPal e pagamento na entrega em áreas selecionadas.",
+            "keywords": [
+                "pago",
+                "pagos",
+                "tarjeta",
+                "payment",
+                "card",
+                "pagamento",
+                "cartão"
+            ]
+        }
+    ]
+}

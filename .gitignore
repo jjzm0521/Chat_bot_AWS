@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+cdk.out/
+*.js
+*.d.ts
+!jest.config.js
+!vite.config.ts
+
+# Python
+__pycache__/
+*.pyc
+.env
+*.egg-info/
+.venv/
+
+# IDE
+.idea/
+*.swp
+*.swo
+.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Lambda layers build
+backend/layers/shared/python/
+
+# Local testing
+.env.local
+.env.*.local
+
+# TypeScript build info
+*.tsbuildinfo
