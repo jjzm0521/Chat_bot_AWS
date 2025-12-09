@@ -176,8 +176,31 @@ def handle_fallback(event: dict, input_text: str, language: str) -> dict:
     
     # Use Bedrock to generate response
     try:
-        # We can add more context here if available
+        # Fetch conversation history for context
+        history_context = ""
+        try:
+            # Get last 5 messages
+            history = dynamo_client.get_conversation_history(session_id, limit=5)
+            # Reverse to have oldest first
+            history.reverse()
+            
+            if history:
+                history_text = []
+                for msg in history:
+                    if msg.user_message:
+                        history_text.append(f"User: {msg.user_message}")
+                    if msg.bot_response:
+                        history_text.append(f"Assistant: {msg.bot_response}")
+                
+                history_context = "\n".join(history_text)
+                logger.info(f"Retrieved {len(history)} messages for context")
+        except Exception as h_e:
+            logger.warning(f"Failed to retrieve history: {h_e}")
+
+        # Construct context
         context = f"The user is speaking in {language}."
+        if history_context:
+            context += f"\n\nConversation History:\n{history_context}"
         
         # Add some basic info about the business/bot if we want the AI to be aware
         # context += " You are a helpful assistant for an e-commerce store."
