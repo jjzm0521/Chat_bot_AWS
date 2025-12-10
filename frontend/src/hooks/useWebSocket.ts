@@ -1,9 +1,25 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { WebSocketMessage, Language } from '../types/chat.types';
 
-// Session ID generator function (defined before use)
-function createSessionId(): string {
-    return `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+// Session ID management - persists in localStorage for memory continuity
+const SESSION_STORAGE_KEY = 'chatbot_session_id';
+
+function getOrCreateSessionId(): string {
+    // Try to get existing session from localStorage
+    const existingSession = localStorage.getItem(SESSION_STORAGE_KEY);
+    if (existingSession) {
+        return existingSession;
+    }
+    // Create new session and store it
+    const newSession = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    localStorage.setItem(SESSION_STORAGE_KEY, newSession);
+    return newSession;
+}
+
+function resetSessionId(): string {
+    const newSession = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    localStorage.setItem(SESSION_STORAGE_KEY, newSession);
+    return newSession;
 }
 
 const WEBSOCKET_URL = import.meta.env.VITE_WEBSOCKET_URL || 'wss://your-api-id.execute-api.us-east-1.amazonaws.com/production';
@@ -31,7 +47,7 @@ export function useWebSocket(options: UseWebSocketOptions = {}) {
     const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'error'>('disconnected');
     const wsRef = useRef<WebSocket | null>(null);
     const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const sessionIdRef = useRef<string>(createSessionId());
+    const sessionIdRef = useRef<string>(getOrCreateSessionId());
 
     const connect = useCallback(() => {
         if (wsRef.current?.readyState === WebSocket.OPEN) {
@@ -116,7 +132,7 @@ export function useWebSocket(options: UseWebSocketOptions = {}) {
     }, []);
 
     const resetSession = useCallback(() => {
-        sessionIdRef.current = createSessionId();
+        sessionIdRef.current = resetSessionId();
     }, []);
 
     useEffect(() => {

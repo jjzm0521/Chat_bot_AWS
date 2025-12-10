@@ -89,6 +89,8 @@ class ChatbotStack extends cdk.Stack {
                 'lex:PutSession',
                 'lex:GetSession',
                 'lex:DeleteSession',
+                'bedrock:InvokeModel',
+                'bedrock:InvokeModelWithResponseStream',
             ],
             resources: ['*'],
         });
@@ -106,8 +108,8 @@ class ChatbotStack extends cdk.Stack {
                 CONVERSATIONS_TABLE: conversationsTable.tableName,
                 KNOWLEDGE_BASE_TABLE: knowledgeBaseTable.tableName,
                 ANALYTICS_TABLE: analyticsTable.tableName,
-                LEX_BOT_ID: 'PLACEHOLDER',
-                LEX_BOT_ALIAS_ID: 'PLACEHOLDER',
+                LEX_BOT_ID: 'X3ADVBRCTQ',
+                LEX_BOT_ALIAS_ID: '9VQMVYGAGE',
                 LOG_LEVEL: 'INFO',
             },
         });

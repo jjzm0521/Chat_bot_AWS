@@ -1,0 +1,41 @@
+{
+    "intentName": "GreetingIntent",
+    "description": "Handles user greetings",
+    "sampleUtterances": [
+        {
+            "utterance": "hola"
+        },
+        {
+            "utterance": "buenos días"
+        },
+        {
+            "utterance": "buenas tardes"
+        },
+        {
+            "utterance": "buenas noches"
+        },
+        {
+            "utterance": "qué tal"
+        },
+        {
+            "utterance": "hey"
+        },
+        {
+            "utterance": "saludos"
+        }
+    ],
+    "intentClosingSetting": {
+        "closingResponse": {
+            "messageGroups": [
+                {
+                    "message": {
+                        "plainTextMessage": {
+                            "value": "¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy? Puedo responder preguntas sobre precios, envíos, devoluciones, garantía y más."
+                        }
+                    }
+                }
+            ]
+        },
+        "isActive": true
+    }
+}
